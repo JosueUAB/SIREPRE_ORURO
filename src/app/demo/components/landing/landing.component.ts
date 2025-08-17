@@ -90,8 +90,8 @@ export class LandingComponent {
   };
 
   personas: Persona[] = [
-    { id: 1, nombre: 'Jesus Alberto Ledezma Villalta', ci: '21312312312', cargo: 'Ingeniero de Soporte', foto: '../../../../assets/soporte/01.png' },
-    { id: 2, nombre: 'Rivaldo Aldair Ledezma Villalta', ci: '21312312312', cargo: 'Analista de Sistemas', foto: '../../../../assets/soporte/01.png' },
+    { id: 1, nombre: 'Jesus Alberto Ledezma Villalta', ci: '21312312312', cargo: 'Ingeniero de Soporte', foto: 'assets/soporte/01.png' },
+    { id: 2, nombre: 'Rivaldo Aldair Ledezma Villalta', ci: '21312312312', cargo: 'Analista de Sistemas', foto: 'assets/soporte/01.png' },
     // Resto de personas...
   ];
 
