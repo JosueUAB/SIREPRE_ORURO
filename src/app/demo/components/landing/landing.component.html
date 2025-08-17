@@ -1,0 +1,219 @@
+
+
+<!-- DETALLE DE UNA PERSONA -->
+<!-- <div *ngIf="personaSeleccionada && !mostrarLista" class="mt-5">
+  <p-card [header]="personaSeleccionada.nombre" [subheader]="personaSeleccionada.cargo">
+    <img [src]="personaSeleccionada.foto" [alt]="personaSeleccionada.nombre"
+         class="w-full border-round mb-3" style="max-width:300px">
+    <p><b>CI:</b> {{personaSeleccionada.ci}}</p>
+    <button pButton label="Volver" icon="pi pi-arrow-left"
+            (click)="volverALista()" class="p-button-secondary"></button>
+  </p-card>
+</div> -->
+
+
+<div class="grid" *ngIf="mostrarLista">
+  <!-- Banner informativo -->
+  <div class="col-12">
+    <p-card styleClass="shadow-3 mb-5">
+      <div class="grid">
+        <div class="col-12 md:col-2 flex justify-content-center">
+          <img [src]="imagenes.logo_sereci" alt="Logo SERECI" style="height: 100px;">
+        </div>
+        <div class="col-12 md:col-8">
+          <h1 class="text-center text-2xl font-bold mb-2" style="color: #0055a5;">Sistema de Verificación de Credenciales</h1>
+          <p class="text-center text-lg mb-3">
+            Personal de Soporte Técnico, Monitoreo y Coordinadores Departamentales
+          </p>
+          <div class="border-round p-3" style="background-color: #f8f9fa; border-left: 4px solid #faca18;">
+            <p class="m-0 text-justify">
+              <i class="pi pi-info-circle mr-2" style="color: #0055a5;"></i>
+              Esta plataforma oficial permite verificar la autenticidad de las credenciales del personal autorizado
+              del SIREPRE Oruro 2025. Toda la información aquí mostrada ha sido validada y debe coincidir
+              exactamente con los documentos físicos portados por los funcionarios.
+              <span class="font-semibold">Los datos son actualizados periódicamente por el SERECI Oruro.</span>
+            </p>
+          </div>
+        </div>
+        <div class="col-12 md:col-2 flex justify-content-center">
+          <img [src]="imagenes.logo_tse" alt="Logo TSE" style="height: 100px;">
+        </div>
+      </div>
+    </p-card>
+  </div>
+
+  <!-- Listado de personal -->
+  <div class="col-12 md:col-6 lg:col-4 xl:col-3" *ngFor="let p of personas">
+  <p-card [style]="{ 'cursor': 'pointer', 'transition': 'transform 0.3s ease, box-shadow 0.3s ease' }"
+          styleClass="shadow-3 hover:shadow-6 border-round-lg"
+          (click)="router.navigate(['/landing', p.id])">
+
+    <!-- Encabezado con foto o placeholder -->
+
+
+    <!-- Cuerpo de la tarjeta -->
+    <div class="text-center p-3">
+
+      <!-- Nombre con efecto de gradiente -->
+      <h3 class="text-xl font-bold mb-2 bg-gradient-to-r from-blue-600 to-yellow-500 text-transparent bg-clip-text">
+        {{ p.nombre | titlecase }}
+      </h3>
+
+
+      <!-- Cargo con chip decorativo -->
+      <div class="mb-3">
+        <p-chip [label]="p.cargo" icon="pi pi-briefcase"
+                class="bg-primary-100 text-primary-800 border-primary-500"></p-chip>
+      </div>
+
+      <!-- Información adicional -->
+      <div class="flex justify-content-between align-items-center mt-3">
+        <span class="text-sm flex align-items-center">
+          <i class="pi pi-id-card mr-2 text-primary-500"></i>
+          <span class="font-medium">{{ p.ci }}</span>
+        </span>
+
+        <button pButton pRipple label="Ver credencial"
+                icon="pi pi-external-link"
+                class="p-button-sm p-button-outlined p-button-primary"></button>
+      </div>
+    </div>
+
+    <!-- Pie de tarjeta sutil -->
+    <ng-template pTemplate="footer">
+      <div class="flex justify-content-center py-2 border-top-1 surface-border">
+        <small class="text-500">SERECI ORURO 2025</small>
+      </div>
+    </ng-template>
+  </p-card>
+</div>
+
+  <!-- Mensaje de seguridad -->
+  <div class="col-12 mt-5">
+    <p-card styleClass="border-top-3 border-blue-500">
+      <div class="flex flex-column md:flex-row align-items-center">
+        <i class="pi pi-shield text-6xl mr-0 md:mr-4 mb-3 md:mb-0" style="color: #0055a5;"></i>
+        <div>
+          <h3 class="text-xl font-bold mb-2">Seguridad y Autenticidad</h3>
+          <p class="m-0">
+            Cada credencial mostrada en este sistema cuenta con elementos de seguridad digital y corresponde
+            a un funcionario debidamente registrado. Ante cualquier discrepancia, contacte inmediatamente
+            al SERECI Oruro al <span class="font-semibold">(+591) 2 1234567</span> o al correo
+            <span class="font-semibold">seguridadereci-oruro.gob.bo</span>
+          </p>
+        </div>
+      </div>
+    </p-card>
+  </div>
+</div>
+
+
+
+
+
+<div *ngIf="personaSeleccionada && !mostrarLista" class="grid mt-3" (contextmenu)="preventDefaultActions($event)">
+  <div class="col-12 md:col-8 md:col-offset-2 lg:col-6 lg:col-offset-3">
+    <p-card class="credencial-card relative" style="user-select: none;">
+      <!-- Marca de agua de fondo ajustada -->
+      <div class="watermark">
+        <img [src]="imagenes.marca_agua" alt="Marca de agua SERECI"
+             style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+                    opacity: 0.1; max-width: 80%; max-height: 80%; pointer-events: none;">
+      </div>
+
+      <!-- Encabezado de la credencial -->
+      <div class="credencial-header p-3" style="background-color: #faca18; border-radius: 10px 10px 0 0;">
+        <div class="flex justify-content-between align-items-center">
+          <img [src]="imagenes.logo_sereci" alt="Logo SERECI" style="height: 50px; filter: drop-shadow(0 0 2px rgba(0,0,0,0.3));">
+          <div class="text-center">
+            <h1 class="text-xl font-bold m-0" style="color: #000; text-shadow: 0 1px 2px rgba(0,0,0,0.2);">CREDENCIAL SIREPRE</h1>
+            <p class="text-sm m-0" style="color: #000;">SERVICIO DE REGISTRO CÍVICO</p>
+          </div>
+          <img [src]="imagenes.logo_tse" alt="Logo TSE" style="height: 50px; filter: drop-shadow(0 0 2px rgba(0,0,0,0.3));">
+        </div>
+      </div>
+
+      <!-- Cuerpo de la credencial -->
+      <div class="p-4" style="position: relative; z-index: 1;">
+        <div class="grid">
+          <!-- Foto con contenedor fijo y ajuste automático -->
+          <div class="col-12 md:col-4 flex flex-column align-items-center">
+            <div class="photo-container mb-3" style="width: 160px; height: 200px; border: 3px solid #faca18; border-radius: 5px; overflow: hidden; background-color: #f8f9fa;">
+              <img [src]="personaSeleccionada.foto"
+                   [alt]="personaSeleccionada.nombre"
+                   style="width: 100%; height: 100%; object-fit: cover; object-position: center top;">
+            </div>
+            <p-chip label="ACTIVO" icon="pi pi-check-circle" class="bg-green-200 text-green-800 font-bold"></p-chip>
+
+          </div>
+
+          <!-- Datos personales -->
+          <div class="col-12 md:col-8">
+            <div class="field grid">
+              <label class="col-12 md:col-3 font-bold">NOMBRES:</label>
+              <div class="col-12 md:col-9">
+                <p class="m-0 text-900 font-medium" style="border-bottom: 1px dashed #ccc; padding-bottom: 3px;">{{personaSeleccionada.nombre | uppercase}}</p>
+              </div>
+            </div>
+
+            <div class="field grid mt-3">
+              <label class="col-12 md:col-3 font-bold">CARGO:</label>
+              <div class="col-12 md:col-9">
+                <p class="m-0 text-900" style="border-bottom: 1px dashed #ccc; padding-bottom: 3px;">{{personaSeleccionada.cargo}}</p>
+              </div>
+            </div>
+
+            <div class="field grid mt-3">
+              <label class="col-12 md:col-3 font-bold">CÉDULA:</label>
+              <div class="col-12 md:col-9">
+                <p class="m-0 text-900" style="border-bottom: 1px dashed #ccc; padding-bottom: 3px;">{{personaSeleccionada.ci}}</p>
+              </div>
+            </div>
+
+            <div class="field grid mt-3">
+              <label class="col-12 md:col-3 font-bold">DEPENDENCIA:</label>
+              <div class="col-12 md:col-9">
+                <p class="m-0 text-900" style="border-bottom: 1px dashed #ccc; padding-bottom: 3px;">SERECI ORURO</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Texto legal -->
+        <div class="border-top-1 border-gray-200 mt-4 pt-3">
+          <p class="text-sm text-justify" style="line-height: 1.4;">
+            El Servicio de Registro Cívico (SERECI) Oruro certifica que la o el portador (a) de la presente
+            CREDENCIAL ES SERVIDOR (A) PUBLICO (A) DEL TRIBUNAL SUPREMO ELECTORAL. Por Tanto: Se solicita a las
+            autoridades electorales, judiciales, administrativas, políticas, militares, originarias Campesinas
+            y ciudadanía en general del estado Plurinacional de Bolivia, reconocer las prerrogativas inherentes
+            a su cargo y facilitar la cooperación necesaria y oportuna para el cumplimiento de sus específicas
+            funciones de acuerdo al Art. 208. III Constitución Política del Estado y Ley 1632 del 6/6/2025 que
+            modifica la Ley 026.
+          </p>
+        </div>
+
+        <!-- Firma digital -->
+        <div class="grid mt-4">
+          <div class="col-12 flex flex-column align-items-center">
+            <img [src]="imagenes.firma_digital"
+                 alt="Firma digital autorizada"
+                 style="height: 60px; margin-bottom: 5px; filter: drop-shadow(0 0 1px rgba(0,0,0,0.2));">
+            <div class="border-top-1 border-gray-400 w-9 mb-1" style="border-top-width: 2px !important;"></div>
+            <small class="text-xs text-600">Firma y sello del responsable</small>
+            <p class="text-xs mt-1 text-center" style="line-height: 1.2;">
+              <span class="font-bold">Dr. Adhemar Guillermo Cucho Camacho</span><br>
+                                DIRECTOR DEPARTAMENTAL DEL
+                                    SERECI - ORURO
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Pie de página -->
+      <div class="flex justify-content-center p-2" style="background-color: #faca18; border-radius: 0 0 10px 10px;">
+        <button pButton label="Volver" icon="pi pi-arrow-left"
+                (click)="volverALista()" class="p-button-sm p-button-text p-button-plain"></button>
+      </div>
+    </p-card>
+  </div>
+</div>
