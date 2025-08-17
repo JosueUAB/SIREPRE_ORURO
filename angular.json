@@ -100,7 +100,11 @@
                     }
                 },
                 "deploy": {
-                  "builder": "angular-cli-ghpages:deploy"
+                  "builder": "angular-cli-ghpages:deploy",
+                  "options": {
+           "baseHref": "/SIREPRE_ORURO/",
+           "repo": "https://github.com/JosueUAB/SIREPRE_ORURO.git"
+
                 }
             }
         }
