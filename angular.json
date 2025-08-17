@@ -103,7 +103,8 @@
                   "builder": "angular-cli-ghpages:deploy",
                   "options": {
            "baseHref": "/SIREPRE_ORURO/",
-           "repo": "https://github.com/JosueUAB/SIREPRE_ORURO.git"
+           "repo": "https://github.com/JosueUAB/SIREPRE_ORURO.git",
+           "dir": "dist/sakai-ng" 
 
                 }
             }

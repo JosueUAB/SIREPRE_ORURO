@@ -79,10 +79,14 @@ interface Persona {
 export class LandingComponent {
   // Imágenes centralizadas
   imagenes = {
-    logo_sereci: '../../../../assets/logos/1.png',
-    logo_tse: '../../../../assets/logos/2.png',
-    firma_digital: '../../../../assets/logos/3.png',
-    marca_agua: '../../../../assets/logos/sereci.png'
+    // logo_sereci: '../../../../assets/logos/1.png',
+    // logo_tse: '../../../../assets/logos/2.png',
+    // firma_digital: '../../../../assets/logos/3.png',
+    // marca_agua: '../../../../assets/logos/sereci.png'
+     logo_sereci: 'assets/logos/1.png',
+  logo_tse: 'assets/logos/2.png',
+  firma_digital: 'assets/logos/3.png',
+  marca_agua: 'assets/logos/sereci.png'
   };
 
   personas: Persona[] = [
